@@ -34,15 +34,16 @@ struct ContentView: View {
                 // Contenido principal
                 ScrollView {
                     VStack(spacing: 20) {
-                        // Header con imagen de médico rotativa
+                        // Header con logo de Fibonacci arriba
                         VStack(spacing: 10) {
-                            Image(doctorImages[currentDoctorIndex])
+                            // Logo de Fibonacci en la parte superior
+                            Image("fibonacci-logo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 120, height: 120)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.red, lineWidth: 3))
-                                .shadow(radius: 10)
+                                .frame(width: 100, height: 100)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 2))
+                                .shadow(radius: 8)
                                 .onTapGesture {
                                     // Conectar a Vaser Token Wallet
                                     walletService.connectVaserToken()
