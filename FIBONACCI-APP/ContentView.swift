@@ -124,14 +124,13 @@ struct ContentView: View {
                                 }
                             }) {
                                 VStack(spacing: 10) {
-                                    // Video del Vaser Token
+                                    // Video del Vaser Token (circular)
                                     if let videoURL = Bundle.main.url(forResource: "vaser-token", withExtension: "mp4") {
                                         VideoPlayer(player: AVPlayer(url: videoURL))
-                                            .frame(height: 120)
-                                            .cornerRadius(15)
-                                            .clipped()
+                                            .frame(width: 120, height: 120)
+                                            .clipShape(Circle())
                                             .overlay(
-                                                RoundedRectangle(cornerRadius: 15)
+                                                Circle()
                                                     .stroke(walletService.isConnected ? Color.green : Color.blue, lineWidth: 3)
                                             )
                                     }
