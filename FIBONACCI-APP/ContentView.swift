@@ -15,6 +15,8 @@ struct ContentView: View {
     @State private var currentDoctorIndex = 0
     @StateObject private var walletService = WalletService()
     @State private var showingWalletSelection = false
+    @State private var showingMedicalGames = false
+    @State private var showingAIAssistant = false
     
     // Lista de imágenes de médicos
     private let doctorImages = [
@@ -142,8 +144,8 @@ struct ContentView: View {
                     
                         // Lista de elementos con fondo semitransparente
                         VStack {
-                            List {
-                                ForEach(items) { item in
+            List {
+                ForEach(items) { item in
                                     HStack {
                                         Image(systemName: "medical.thermometer")
                                             .foregroundColor(.red)
@@ -153,9 +155,9 @@ struct ContentView: View {
                                     .padding(.vertical, 8)
                                     .background(Color.white.opacity(0.1))
                                     .cornerRadius(8)
-                                }
-                                .onDelete(perform: deleteItems)
-                            }
+                }
+                .onDelete(perform: deleteItems)
+            }
                             .listStyle(PlainListStyle())
                             .background(Color.clear)
                         }
@@ -169,12 +171,10 @@ struct ContentView: View {
                             HStack(spacing: 30) {
                                 // Video Juegos Médicos (circular)
                                 VStack(spacing: 8) {
-                                    Button(action: {
-                                        // Abrir app de juegos médicos
-                                        if let url = URL(string: "https://juegos-medicos.fibonacci-app.com") {
-                                            UIApplication.shared.open(url)
-                                        }
-                                    }) {
+                                        Button(action: {
+                                            // Mostrar vista de juegos médicos
+                                            showingMedicalGames = true
+                                        }) {
                                         if let videoURL = Bundle.main.url(forResource: "doc-games", withExtension: "mp4") {
                                             VideoPlayer(player: {
                                                 let player = AVPlayer(url: videoURL)
@@ -199,12 +199,10 @@ struct ContentView: View {
                                 
                                 // Video IA Asistente (circular)
                                 VStack(spacing: 8) {
-                                    Button(action: {
-                                        // Abrir app de IA asistente médico
-                                        if let url = URL(string: "https://ia-asistente.fibonacci-app.com") {
-                                            UIApplication.shared.open(url)
-                                        }
-                                    }) {
+                                        Button(action: {
+                                            // Mostrar vista de IA asistente
+                                            showingAIAssistant = true
+                                        }) {
                                         if let videoURL = Bundle.main.url(forResource: "IA-ASIST", withExtension: "mp4") {
                                             VideoPlayer(player: {
                                                 let player = AVPlayer(url: videoURL)
@@ -278,14 +276,20 @@ struct ContentView: View {
                     .padding(.horizontal)
                 }
                 .navigationTitle("FIBONACCI")
-                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.large)
             }
             .sheet(isPresented: $showingWalletSelection) {
                 WalletSelectionView(walletService: walletService)
             }
+            .sheet(isPresented: $showingMedicalGames) {
+                MedicalGamesView()
+            }
+            .sheet(isPresented: $showingAIAssistant) {
+                AIAssistantView()
+            }
         }
     }
-    
+
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())

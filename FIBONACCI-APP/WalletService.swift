@@ -44,22 +44,22 @@ enum WalletType: String, CaseIterable {
     var deepLink: String {
         switch self {
         case .algorand:
-            return "algorand://"
+            return "algorand://wallet/connect?app=fibonacci-medical&callback=fibonacci://wallet/callback"
         case .solana:
-            return "solana://"
+            return "phantom://wallet/connect?app=fibonacci-medical&callback=fibonacci://wallet/callback"
         case .tom:
-            return "tom://"
+            return "ton://wallet/connect?app=fibonacci-medical&callback=fibonacci://wallet/callback"
         }
     }
     
     var webURL: String {
         switch self {
         case .algorand:
-            return "https://wallet.myalgo.com/"
+            return "https://wallet.myalgo.com/connect?app=fibonacci-medical&redirect=fibonacci://wallet/success"
         case .solana:
-            return "https://phantom.app/"
+            return "https://phantom.app/ul/v1/connect?app=fibonacci-medical&redirect=fibonacci://wallet/success"
         case .tom:
-            return "https://tomwallet.com/"
+            return "https://wallet.ton.org/connect?app=fibonacci-medical&redirect=fibonacci://wallet/success"
         }
     }
 }
