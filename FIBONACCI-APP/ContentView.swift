@@ -110,7 +110,8 @@ struct ContentView: View {
                             .padding(.top, 5)
                             
                             Text("App Médica de Simulación con Asistentes de IA")
-                                .font(.subheadline)
+                                .font(.headline)
+                                .fontWeight(.bold)
                                 .foregroundColor(.white.opacity(0.9))
                                 .shadow(radius: 3)
                                 .multilineTextAlignment(.center)
@@ -190,7 +191,7 @@ struct ContentView: View {
                                     }
                                     
                                     Text("Juegos Médicos")
-                                        .font(.caption)
+                                        .font(.headline)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .shadow(radius: 2)
@@ -220,7 +221,7 @@ struct ContentView: View {
                                     }
                                     
                                     Text("IA Asistente")
-                                        .font(.caption)
+                                        .font(.headline)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .shadow(radius: 2)
@@ -263,23 +264,14 @@ struct ContentView: View {
                                 .shadow(radius: 8)
                             }
                             
-                            // Botón para agregar elementos (opcional)
-                            Button(action: addItem) {
-                                Text("Agregar Elemento Médico")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.red)
-                                    .cornerRadius(10)
-                                    .shadow(radius: 5)
-                            }
                         }
                         .padding(.bottom, 20)
                         
                         // Texto de derechos reservados
-                        Text("Derechos Reservados Panacea Icono S.A.")
-                            .font(.caption2)
-                            .foregroundColor(.white.opacity(0.7))
+                        Text("PANACEA ICONO S.A.")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white.opacity(0.9))
                             .shadow(radius: 2)
                             .padding(.bottom, 10)
                     }
