@@ -81,10 +81,11 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .shadow(radius: 5)
                             
-                            Text("Medical App with Golden Ratio")
+                            Text("App Médica de Simulación con Asistentes de IA")
                                 .font(.subheadline)
                                 .foregroundColor(.white.opacity(0.9))
                                 .shadow(radius: 3)
+                                .multilineTextAlignment(.center)
                             
                             // Vaser Token Info
                             if walletService.isConnected {
@@ -143,13 +144,13 @@ struct ContentView: View {
                                     // Fila de logos de video - Juegos Médicos e IA Asistente
                                     HStack(spacing: 30) {
                                         // Video Juegos Médicos (circular)
-                                        Button(action: {
-                                            // Abrir app de juegos médicos
-                                            if let url = URL(string: "https://juegos-medicos.fibonacci-app.com") {
-                                                UIApplication.shared.open(url)
-                                            }
-                                        }) {
-                                            VStack(spacing: 8) {
+                                        VStack(spacing: 8) {
+                                            Button(action: {
+                                                // Abrir app de juegos médicos
+                                                if let url = URL(string: "https://juegos-medicos.fibonacci-app.com") {
+                                                    UIApplication.shared.open(url)
+                                                }
+                                            }) {
                                                 if let videoURL = Bundle.main.url(forResource: "doc-games", withExtension: "mp4") {
                                                     VideoPlayer(player: {
                                                         let player = AVPlayer(url: videoURL)
@@ -163,27 +164,23 @@ struct ContentView: View {
                                                             .stroke(Color.purple, lineWidth: 3)
                                                     )
                                                 }
-                                                
-                                                Text("Juegos Médicos")
-                                                    .font(.caption)
-                                                    .fontWeight(.bold)
-                                                    .foregroundColor(.white)
-                                                    .shadow(radius: 2)
                                             }
-                                            .padding(8)
-                                            .background(Color.purple.opacity(0.2))
-                                            .cornerRadius(15)
-                                            .shadow(radius: 5)
+                                            
+                                            Text("Juegos Médicos")
+                                                .font(.caption)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.white)
+                                                .shadow(radius: 2)
                                         }
                                         
                                         // Video IA Asistente (circular)
-                                        Button(action: {
-                                            // Abrir app de IA asistente médico
-                                            if let url = URL(string: "https://ia-asistente.fibonacci-app.com") {
-                                                UIApplication.shared.open(url)
-                                            }
-                                        }) {
-                                            VStack(spacing: 8) {
+                                        VStack(spacing: 8) {
+                                            Button(action: {
+                                                // Abrir app de IA asistente médico
+                                                if let url = URL(string: "https://ia-asistente.fibonacci-app.com") {
+                                                    UIApplication.shared.open(url)
+                                                }
+                                            }) {
                                                 if let videoURL = Bundle.main.url(forResource: "IA-ASIST", withExtension: "mp4") {
                                                     VideoPlayer(player: {
                                                         let player = AVPlayer(url: videoURL)
@@ -197,17 +194,13 @@ struct ContentView: View {
                                                             .stroke(Color.cyan, lineWidth: 3)
                                                     )
                                                 }
-                                                
-                                                Text("IA Asistente")
-                                                    .font(.caption)
-                                                    .fontWeight(.bold)
-                                                    .foregroundColor(.white)
-                                                    .shadow(radius: 2)
                                             }
-                                            .padding(8)
-                                            .background(Color.cyan.opacity(0.2))
-                                            .cornerRadius(15)
-                                            .shadow(radius: 5)
+                                            
+                                            Text("IA Asistente")
+                                                .font(.caption)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.white)
+                                                .shadow(radius: 2)
                                         }
                                     }
                                     
@@ -235,7 +228,7 @@ struct ContentView: View {
                                                 )
                                             }
                                             
-                                            Text(walletService.isConnected ? "VASER Token Conectado" : "Conectar VASER Token")
+                                            Text("Conectar Wallet")
                                                 .font(.headline)
                                                 .fontWeight(.bold)
                                                 .foregroundColor(.white)
@@ -263,6 +256,33 @@ struct ContentView: View {
                             }
                         }
                         .padding(.bottom, 20)
+                        
+                        // Texto de derechos reservados
+                        VStack(spacing: 5) {
+                            Text("Derechos Reservados")
+                                .font(.caption2)
+                                .foregroundColor(.white.opacity(0.7))
+                                .shadow(radius: 2)
+                            
+                            Button(action: {
+                                if let url = URL(string: "https://med.panas.app") {
+                                    UIApplication.shared.open(url)
+                                }
+                            }) {
+                                Text("panacea-icono.org")
+                                    .font(.caption2)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.blue)
+                                    .underline()
+                                    .shadow(radius: 2)
+                            }
+                            
+                            Text("med.panas.app")
+                                .font(.caption2)
+                                .foregroundColor(.white.opacity(0.7))
+                                .shadow(radius: 2)
+                        }
+                        .padding(.bottom, 10)
                     }
                     .padding(.horizontal)
                 }
