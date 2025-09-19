@@ -16,10 +16,10 @@ struct ContentView: View {
     
     // Lista de imágenes de médicos (nombres simplificados)
     private let doctorImages = [
-        "20250918_2154_Ícono Médico Sublime_simple_compose_01k5fttxp3fyrtrk1vacwhe91f",
-        "20250918_2154_Ícono Médico Sublime_simple_compose_01k5fttxp3fyrtrk1vacwhe91f",
-        "20250918_2154_Ícono Médico Sublime_simple_compose_01k5fttxp3fyrtrk1vacwhe91f",
-        "20250918_2154_Ícono Médico Sublime_simple_compose_01k5fttxp3fyrtrk1vacwhe91f"
+        "doctor_logo",
+        "doctor_logo",
+        "doctor_logo",
+        "doctor_logo"
     ]
 
     var body: some View {
@@ -136,7 +136,7 @@ struct VideoBackgroundView: View {
         // Intentar cargar video si está disponible
         .overlay(
             Group {
-                if let videoURL = Bundle.main.url(forResource: "20250916_0158_Fibonacci Waves Relaxation_simple_compose_01k58hn45rf1jv2b2xj3nmramk", withExtension: "mp4") {
+                if let videoURL = Bundle.main.url(forResource: "fibonacci_waves", withExtension: "mp4") {
                     VideoPlayer(player: AVPlayer(url: videoURL))
                         .aspectRatio(contentMode: .fill)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
