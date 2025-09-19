@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/master.swiftdeps"
+  },
+  "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI-APPPackageDiscoveredTests.derived/FIBONACCI-APPTests.swift": {
+    "dependencies": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/FIBONACCI-APPTests.d",
+    "object": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/FIBONACCI-APPTests.swift.o",
+    "swiftmodule": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/FIBONACCI-APPTests~partial.swiftmodule",
+    "swift-dependencies": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/FIBONACCI-APPTests.swiftdeps"
+  },
+  "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI-APPPackageDiscoveredTests.derived/all-discovered-tests.swift": {
+    "dependencies": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/all-discovered-tests.d",
+    "object": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/all-discovered-tests.swift.o",
+    "swiftmodule": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/all-discovered-tests~partial.swiftmodule",
+    "swift-dependencies": "/home/runner/work/FIBONACCI-APP/FIBONACCI-APP/.build/x86_64-unknown-linux-gnu/debug/FIBONACCI_APPPackageDiscoveredTests.build/all-discovered-tests.swiftdeps"
+  }
+}
