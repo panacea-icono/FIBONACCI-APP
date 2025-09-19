@@ -277,6 +277,8 @@ struct ContentView: View {
                 }
                 .navigationTitle("FIBONACCI")
                 .navigationBarTitleDisplayMode(.large)
+                .toolbarColorScheme(.dark, for: .navigationBar)
+                .toolbarBackground(Color.clear, for: .navigationBar)
             }
             .sheet(isPresented: $showingWalletSelection) {
                 WalletSelectionView(walletService: walletService)
