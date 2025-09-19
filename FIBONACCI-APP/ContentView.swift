@@ -112,9 +112,42 @@ struct ContentView: View {
                         .cornerRadius(15)
                         .padding(.horizontal)
                         
-                        // Botones de acción
-                        HStack(spacing: 15) {
-                            // Botón para agregar elementos
+                        // Video Vaser Token como botón principal
+                        VStack(spacing: 15) {
+                            // Video Vaser Token clickeable
+                            Button(action: {
+                                if walletService.isConnected {
+                                    walletService.disconnectWallet()
+                                } else {
+                                    showingWalletSelection = true
+                                }
+                            }) {
+                                VStack(spacing: 10) {
+                                    // Video del Vaser Token
+                                    if let videoURL = Bundle.main.url(forResource: "vaser-token", withExtension: "mp4") {
+                                        VideoPlayer(player: AVPlayer(url: videoURL))
+                                            .frame(height: 120)
+                                            .cornerRadius(15)
+                                            .clipped()
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(walletService.isConnected ? Color.green : Color.blue, lineWidth: 3)
+                                            )
+                                    }
+                                    
+                                    Text(walletService.isConnected ? "VASER Token Conectado" : "Conectar VASER Token")
+                                        .font(.headline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .shadow(radius: 3)
+                                }
+                                .padding()
+                                .background(walletService.isConnected ? Color.green.opacity(0.3) : Color.blue.opacity(0.3))
+                                .cornerRadius(20)
+                                .shadow(radius: 8)
+                            }
+                            
+                            // Botón para agregar elementos médicos
                             Button(action: addItem) {
                                 HStack {
                                     Image(systemName: "plus.circle.fill")
@@ -124,26 +157,6 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(Color.red)
-                                .cornerRadius(10)
-                                .shadow(radius: 5)
-                            }
-                            
-                            // Botón de billetera
-                            Button(action: {
-                                if walletService.isConnected {
-                                    walletService.disconnectWallet()
-                                } else {
-                                    showingWalletSelection = true
-                                }
-                            }) {
-                                HStack {
-                                    Image(systemName: walletService.isConnected ? "wallet.pass.fill" : "wallet.pass")
-                                    Text(walletService.isConnected ? "Desconectar" : "Conectar Wallet")
-                                }
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(walletService.isConnected ? Color.orange : Color.blue)
                                 .cornerRadius(10)
                                 .shadow(radius: 5)
                             }
