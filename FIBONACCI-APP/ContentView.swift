@@ -75,11 +75,39 @@ struct ContentView: View {
                                 }
                             }
                             
-                            Text("FIBONACCI APP")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .shadow(radius: 5)
+                            // Iconos de plataformas como referencia
+                            HStack(spacing: 15) {
+                                // Solana
+                                Image(systemName: "s.circle.fill")
+                                    .font(.title2)
+                                    .foregroundColor(.purple)
+                                    .shadow(radius: 2)
+                                
+                                // TON
+                                Image(systemName: "t.circle.fill")
+                                    .font(.title2)
+                                    .foregroundColor(.blue)
+                                    .shadow(radius: 2)
+                                
+                                // Telegram
+                                Image(systemName: "paperplane.circle.fill")
+                                    .font(.title2)
+                                    .foregroundColor(.cyan)
+                                    .shadow(radius: 2)
+                                
+                                // Apple
+                                Image(systemName: "applelogo")
+                                    .font(.title2)
+                                    .foregroundColor(.white)
+                                    .shadow(radius: 2)
+                                
+                                // Algorand
+                                Image(systemName: "a.circle.fill")
+                                    .font(.title2)
+                                    .foregroundColor(.green)
+                                    .shadow(radius: 2)
+                            }
+                            .padding(.top, 5)
                             
                             Text("App Médica de Simulación con Asistentes de IA")
                                 .font(.subheadline)
