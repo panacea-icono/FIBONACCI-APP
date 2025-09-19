@@ -124,15 +124,19 @@ struct ContentView: View {
                                 }
                             }) {
                                 VStack(spacing: 10) {
-                                    // Video del Vaser Token (circular)
+                                    // Video del Vaser Token (circular con autoplay)
                                     if let videoURL = Bundle.main.url(forResource: "vaser-token", withExtension: "mp4") {
-                                        VideoPlayer(player: AVPlayer(url: videoURL))
-                                            .frame(width: 120, height: 120)
-                                            .clipShape(Circle())
-                                            .overlay(
-                                                Circle()
-                                                    .stroke(walletService.isConnected ? Color.green : Color.blue, lineWidth: 3)
-                                            )
+                                        VideoPlayer(player: {
+                                            let player = AVPlayer(url: videoURL)
+                                            player.play() // Autoplay
+                                            return player
+                                        }())
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                        .overlay(
+                                            Circle()
+                                                .stroke(walletService.isConnected ? Color.green : Color.blue, lineWidth: 3)
+                                        )
                                     }
                                     
                                     Text(walletService.isConnected ? "VASER Token Conectado" : "Conectar VASER Token")
@@ -205,15 +209,19 @@ struct VideoBackgroundView: View {
         )
         .ignoresSafeArea()
         
-        // Intentar cargar video si está disponible
+        // Intentar cargar video si está disponible (con autoplay)
         .overlay(
             Group {
                 if let videoURL = Bundle.main.url(forResource: "fondo", withExtension: "mp4") {
-                    VideoPlayer(player: AVPlayer(url: videoURL))
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .clipped()
-                        .ignoresSafeArea(.all)
+                    VideoPlayer(player: {
+                        let player = AVPlayer(url: videoURL)
+                        player.play() // Autoplay
+                        return player
+                    }())
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .clipped()
+                    .ignoresSafeArea(.all)
                 }
             }
         )
