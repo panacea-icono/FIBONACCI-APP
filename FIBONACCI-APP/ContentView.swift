@@ -135,11 +135,6 @@ struct ContentView: View {
                                 .padding(.vertical, 8)
                                 .background(Color.green.opacity(0.2))
                                 .cornerRadius(8)
-                            } else {
-                                Text("Toca el logo para conectar Vaser Token")
-                                    .font(.caption)
-                                    .foregroundColor(.yellow)
-                                    .fontWeight(.bold)
                             }
                         }
                         .padding(.top, 40)
@@ -167,150 +162,126 @@ struct ContentView: View {
                         .cornerRadius(15)
                         .padding(.horizontal)
                         
-                                // Videos de Apps Médicas
-                                VStack(spacing: 20) {
-                                    // Fila de logos de video - Juegos Médicos e IA Asistente
-                                    HStack(spacing: 30) {
-                                        // Video Juegos Médicos (circular)
-                                        VStack(spacing: 8) {
-                                            Button(action: {
-                                                // Abrir app de juegos médicos
-                                                if let url = URL(string: "https://juegos-medicos.fibonacci-app.com") {
-                                                    UIApplication.shared.open(url)
-                                                }
-                                            }) {
-                                                if let videoURL = Bundle.main.url(forResource: "doc-games", withExtension: "mp4") {
-                                                    VideoPlayer(player: {
-                                                        let player = AVPlayer(url: videoURL)
-                                                        player.play() // Autoplay
-                                                        return player
-                                                    }())
-                                                    .frame(width: 100, height: 100)
-                                                    .clipShape(Circle())
-                                                    .overlay(
-                                                        Circle()
-                                                            .stroke(Color.purple, lineWidth: 3)
-                                                    )
-                                                }
-                                            }
-                                            
-                                            Text("Juegos Médicos")
-                                                .font(.caption)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.white)
-                                                .shadow(radius: 2)
+                        // Videos de Apps Médicas
+                        VStack(spacing: 20) {
+                            // Fila de logos de video - Juegos Médicos e IA Asistente
+                            HStack(spacing: 30) {
+                                // Video Juegos Médicos (circular)
+                                VStack(spacing: 8) {
+                                    Button(action: {
+                                        // Abrir app de juegos médicos
+                                        if let url = URL(string: "https://juegos-medicos.fibonacci-app.com") {
+                                            UIApplication.shared.open(url)
                                         }
-                                        
-                                        // Video IA Asistente (circular)
-                                        VStack(spacing: 8) {
-                                            Button(action: {
-                                                // Abrir app de IA asistente médico
-                                                if let url = URL(string: "https://ia-asistente.fibonacci-app.com") {
-                                                    UIApplication.shared.open(url)
-                                                }
-                                            }) {
-                                                if let videoURL = Bundle.main.url(forResource: "IA-ASIST", withExtension: "mp4") {
-                                                    VideoPlayer(player: {
-                                                        let player = AVPlayer(url: videoURL)
-                                                        player.play() // Autoplay
-                                                        return player
-                                                    }())
-                                                    .frame(width: 100, height: 100)
-                                                    .clipShape(Circle())
-                                                    .overlay(
-                                                        Circle()
-                                                            .stroke(Color.cyan, lineWidth: 3)
-                                                    )
-                                                }
-                                            }
-                                            
-                                            Text("IA Asistente")
-                                                .font(.caption)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.white)
-                                                .shadow(radius: 2)
+                                    }) {
+                                        if let videoURL = Bundle.main.url(forResource: "doc-games", withExtension: "mp4") {
+                                            VideoPlayer(player: {
+                                                let player = AVPlayer(url: videoURL)
+                                                player.play() // Autoplay
+                                                return player
+                                            }())
+                                            .frame(width: 100, height: 100)
+                                            .clipShape(Circle())
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color.purple, lineWidth: 3)
+                                            )
                                         }
                                     }
                                     
-                                    // Video Vaser Token como botón principal
+                                    Text("Juegos Médicos")
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .shadow(radius: 2)
+                                }
+                                
+                                // Video IA Asistente (circular)
+                                VStack(spacing: 8) {
                                     Button(action: {
-                                        if walletService.isConnected {
-                                            walletService.disconnectWallet()
-                                        } else {
-                                            showingWalletSelection = true
+                                        // Abrir app de IA asistente médico
+                                        if let url = URL(string: "https://ia-asistente.fibonacci-app.com") {
+                                            UIApplication.shared.open(url)
                                         }
                                     }) {
-                                        VStack(spacing: 10) {
-                                            // Video del Vaser Token (circular con autoplay)
-                                            if let videoURL = Bundle.main.url(forResource: "vaser-token", withExtension: "mp4") {
-                                                VideoPlayer(player: {
-                                                    let player = AVPlayer(url: videoURL)
-                                                    player.play() // Autoplay
-                                                    return player
-                                                }())
-                                                .frame(width: 120, height: 120)
-                                                .clipShape(Circle())
-                                                .overlay(
-                                                    Circle()
-                                                        .stroke(walletService.isConnected ? Color.green : Color.blue, lineWidth: 3)
-                                                )
-                                            }
-                                            
-                                            Text("Conectar Wallet")
-                                                .font(.headline)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.white)
-                                                .shadow(radius: 3)
+                                        if let videoURL = Bundle.main.url(forResource: "IA-ASIST", withExtension: "mp4") {
+                                            VideoPlayer(player: {
+                                                let player = AVPlayer(url: videoURL)
+                                                player.play() // Autoplay
+                                                return player
+                                            }())
+                                            .frame(width: 100, height: 100)
+                                            .clipShape(Circle())
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color.cyan, lineWidth: 3)
+                                            )
                                         }
-                                        .padding()
-                                        .background(walletService.isConnected ? Color.green.opacity(0.3) : Color.blue.opacity(0.3))
-                                        .cornerRadius(20)
-                                        .shadow(radius: 8)
                                     }
+                                    
+                                    Text("IA Asistente")
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .shadow(radius: 2)
                                 }
+                            }
                             
-                            // Botón para agregar elementos médicos
-                            Button(action: addItem) {
-                                HStack {
-                                    Image(systemName: "plus.circle.fill")
-                                    Text("Add Medical Item")
+                            // Video Vaser Token como botón principal
+                            Button(action: {
+                                if walletService.isConnected {
+                                    walletService.disconnectWallet()
+                                } else {
+                                    showingWalletSelection = true
                                 }
-                                .font(.headline)
-                                .foregroundColor(.white)
+                            }) {
+                                VStack(spacing: 10) {
+                                    // Video del Vaser Token (circular con autoplay)
+                                    if let videoURL = Bundle.main.url(forResource: "vaser-token", withExtension: "mp4") {
+                                        VideoPlayer(player: {
+                                            let player = AVPlayer(url: videoURL)
+                                            player.play() // Autoplay
+                                            return player
+                                        }())
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                        .overlay(
+                                            Circle()
+                                                .stroke(walletService.isConnected ? Color.green : Color.blue, lineWidth: 3)
+                                        )
+                                    }
+                                    
+                                    Text("Conectar Wallet")
+                                        .font(.headline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .shadow(radius: 3)
+                                }
                                 .padding()
-                                .background(Color.red)
-                                .cornerRadius(10)
-                                .shadow(radius: 5)
+                                .background(walletService.isConnected ? Color.green.opacity(0.3) : Color.blue.opacity(0.3))
+                                .cornerRadius(20)
+                                .shadow(radius: 8)
+                            }
+                            
+                            // Botón para agregar elementos (opcional)
+                            Button(action: addItem) {
+                                Text("Agregar Elemento Médico")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.red)
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
                             }
                         }
                         .padding(.bottom, 20)
                         
                         // Texto de derechos reservados
-                        VStack(spacing: 5) {
-                            Text("Derechos Reservados")
-                                .font(.caption2)
-                                .foregroundColor(.white.opacity(0.7))
-                                .shadow(radius: 2)
-                            
-                            Button(action: {
-                                if let url = URL(string: "https://med.panas.app") {
-                                    UIApplication.shared.open(url)
-                                }
-                            }) {
-                                Text("panacea-icono.org")
-                                    .font(.caption2)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.blue)
-                                    .underline()
-                                    .shadow(radius: 2)
-                            }
-                            
-                            Text("med.panas.app")
-                                .font(.caption2)
-                                .foregroundColor(.white.opacity(0.7))
-                                .shadow(radius: 2)
-                        }
-                        .padding(.bottom, 10)
+                        Text("Derechos Reservados Panacea Icono S.A.")
+                            .font(.caption2)
+                            .foregroundColor(.white.opacity(0.7))
+                            .shadow(radius: 2)
+                            .padding(.bottom, 10)
                     }
                     .padding(.horizontal)
                 }
@@ -321,22 +292,23 @@ struct ContentView: View {
                 WalletSelectionView(walletService: walletService)
             }
         }
-        
-        private func addItem() {
-            withAnimation {
-                let newItem = Item(timestamp: Date())
-                modelContext.insert(newItem)
-            }
+    }
+    
+    private func addItem() {
+        withAnimation {
+            let newItem = Item(timestamp: Date())
+            modelContext.insert(newItem)
         }
+    }
 
-        private func deleteItems(offsets: IndexSet) {
-            withAnimation {
-                for index in offsets {
-                    modelContext.delete(items[index])
-                }
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(items[index])
             }
         }
     }
+}
 
 // Video de fondo
 struct VideoBackgroundView: View {
