@@ -27,133 +27,137 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Video de fondo
+                // Video de fondo completo
                 VideoBackgroundView()
-                    .ignoresSafeArea()
+                    .ignoresSafeArea(.all)
                 
-                VStack(spacing: 20) {
-                    // Header con imagen de médico rotativa
-                    VStack(spacing: 10) {
-                        Image(doctorImages[currentDoctorIndex])
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 120, height: 120)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.red, lineWidth: 3))
-                            .shadow(radius: 10)
-                            .onTapGesture {
-                                // Conectar a Vaser Token Wallet
-                                walletService.connectVaserToken()
-                                showingWalletSelection = true
-                            }
-                        
-                        Text("FIBONACCI APP")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .shadow(radius: 5)
-                        
-                        Text("Medical App with Golden Ratio")
-                            .font(.subheadline)
-                            .foregroundColor(.white.opacity(0.9))
-                            .shadow(radius: 3)
-                        
-                        // Vaser Token Info
-                        if walletService.isConnected {
-                            VStack(spacing: 5) {
-                                Text("VASER Token Conectado")
-                                    .font(.caption)
-                                    .foregroundColor(.green)
-                                    .fontWeight(.bold)
-                                
-                                Text("Billetera: \(walletService.connectedWallet?.displayName ?? "")")
-                                    .font(.caption2)
-                                    .foregroundColor(.white.opacity(0.8))
-                                
-                                Text("Dirección: \(walletService.walletAddress?.prefix(8) ?? "")...")
-                                    .font(.caption2)
-                                    .foregroundColor(.white.opacity(0.8))
-                            }
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 8)
-                            .background(Color.green.opacity(0.2))
-                            .cornerRadius(8)
-                        } else {
-                            Text("Toca el logo para conectar Vaser Token")
-                                .font(.caption)
-                                .foregroundColor(.yellow)
-                                .fontWeight(.bold)
-                        }
-                    }
-                    .padding(.top, 40)
-                
-                    // Lista de elementos con fondo semitransparente
-                    VStack {
-                        List {
-                            ForEach(items) { item in
-                                HStack {
-                                    Image(systemName: "medical.thermometer")
-                                        .foregroundColor(.red)
-                                    Text("Medical Item - \(item.timestamp, format: Date.FormatStyle(date: .abbreviated, time: .shortened))")
-                                        .foregroundColor(.primary)
+                // Contenido principal
+                ScrollView {
+                    VStack(spacing: 20) {
+                        // Header con imagen de médico rotativa
+                        VStack(spacing: 10) {
+                            Image(doctorImages[currentDoctorIndex])
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 120, height: 120)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.red, lineWidth: 3))
+                                .shadow(radius: 10)
+                                .onTapGesture {
+                                    // Conectar a Vaser Token Wallet
+                                    walletService.connectVaserToken()
+                                    showingWalletSelection = true
                                 }
-                                .padding(.vertical, 8)
-                                .background(Color.white.opacity(0.1))
-                                .cornerRadius(8)
-                            }
-                            .onDelete(perform: deleteItems)
-                        }
-                        .listStyle(PlainListStyle())
-                        .background(Color.clear)
-                    }
-                    .background(Color.black.opacity(0.3))
-                    .cornerRadius(15)
-                    .padding(.horizontal)
-                    
-                    // Botones de acción
-                    HStack(spacing: 15) {
-                        // Botón para agregar elementos
-                        Button(action: addItem) {
-                            HStack {
-                                Image(systemName: "plus.circle.fill")
-                                Text("Add Medical Item")
-                            }
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.red)
-                            .cornerRadius(10)
-                            .shadow(radius: 5)
-                        }
-                        
-                        // Botón de billetera
-                        Button(action: {
+                            
+                            Text("FIBONACCI APP")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .shadow(radius: 5)
+                            
+                            Text("Medical App with Golden Ratio")
+                                .font(.subheadline)
+                                .foregroundColor(.white.opacity(0.9))
+                                .shadow(radius: 3)
+                            
+                            // Vaser Token Info
                             if walletService.isConnected {
-                                walletService.disconnectWallet()
+                                VStack(spacing: 5) {
+                                    Text("VASER Token Conectado")
+                                        .font(.caption)
+                                        .foregroundColor(.green)
+                                        .fontWeight(.bold)
+                                    
+                                    Text("Billetera: \(walletService.connectedWallet?.displayName ?? "")")
+                                        .font(.caption2)
+                                        .foregroundColor(.white.opacity(0.8))
+                                    
+                                    Text("Dirección: \(walletService.walletAddress?.prefix(8) ?? "")...")
+                                        .font(.caption2)
+                                        .foregroundColor(.white.opacity(0.8))
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 8)
+                                .background(Color.green.opacity(0.2))
+                                .cornerRadius(8)
                             } else {
-                                showingWalletSelection = true
+                                Text("Toca el logo para conectar Vaser Token")
+                                    .font(.caption)
+                                    .foregroundColor(.yellow)
+                                    .fontWeight(.bold)
                             }
-                        }) {
-                            HStack {
-                                Image(systemName: walletService.isConnected ? "wallet.pass.fill" : "wallet.pass")
-                                Text(walletService.isConnected ? "Desconectar" : "Conectar Wallet")
-                            }
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(walletService.isConnected ? Color.orange : Color.blue)
-                            .cornerRadius(10)
-                            .shadow(radius: 5)
                         }
+                        .padding(.top, 40)
+                    
+                        // Lista de elementos con fondo semitransparente
+                        VStack {
+                            List {
+                                ForEach(items) { item in
+                                    HStack {
+                                        Image(systemName: "medical.thermometer")
+                                            .foregroundColor(.red)
+                                        Text("Medical Item - \(item.timestamp, format: Date.FormatStyle(date: .abbreviated, time: .shortened))")
+                                            .foregroundColor(.primary)
+                                    }
+                                    .padding(.vertical, 8)
+                                    .background(Color.white.opacity(0.1))
+                                    .cornerRadius(8)
+                                }
+                                .onDelete(perform: deleteItems)
+                            }
+                            .listStyle(PlainListStyle())
+                            .background(Color.clear)
+                        }
+                        .background(Color.black.opacity(0.3))
+                        .cornerRadius(15)
+                        .padding(.horizontal)
+                        
+                        // Botones de acción
+                        HStack(spacing: 15) {
+                            // Botón para agregar elementos
+                            Button(action: addItem) {
+                                HStack {
+                                    Image(systemName: "plus.circle.fill")
+                                    Text("Add Medical Item")
+                                }
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(10)
+                                .shadow(radius: 5)
+                            }
+                            
+                            // Botón de billetera
+                            Button(action: {
+                                if walletService.isConnected {
+                                    walletService.disconnectWallet()
+                                } else {
+                                    showingWalletSelection = true
+                                }
+                            }) {
+                                HStack {
+                                    Image(systemName: walletService.isConnected ? "wallet.pass.fill" : "wallet.pass")
+                                    Text(walletService.isConnected ? "Desconectar" : "Conectar Wallet")
+                                }
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(walletService.isConnected ? Color.orange : Color.blue)
+                                .cornerRadius(10)
+                                .shadow(radius: 5)
+                            }
+                        }
+                        .padding(.bottom, 20)
                     }
-                    .padding(.bottom, 20)
+                    .padding(.horizontal)
                 }
+                .navigationTitle("FIBONACCI")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle("FIBONACCI")
-            .navigationBarTitleDisplayMode(.inline)
-        }
-        .sheet(isPresented: $showingWalletSelection) {
-            WalletSelectionView(walletService: walletService)
+            .sheet(isPresented: $showingWalletSelection) {
+                WalletSelectionView(walletService: walletService)
+            }
         }
     }
 
@@ -196,6 +200,7 @@ struct VideoBackgroundView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .clipped()
+                        .ignoresSafeArea(.all)
                 }
             }
         )
