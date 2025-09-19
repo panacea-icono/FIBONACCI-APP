@@ -171,10 +171,10 @@ struct ContentView: View {
                             HStack(spacing: 30) {
                                 // Video Juegos Médicos (circular)
                                 VStack(spacing: 8) {
-                                        Button(action: {
-                                            // Mostrar vista de juegos médicos
-                                            showingMedicalGames = true
-                                        }) {
+                                    Button(action: {
+                                        // Mostrar vista de juegos médicos
+                                        showingMedicalGames = true
+                                    }) {
                                         if let videoURL = Bundle.main.url(forResource: "doc-games", withExtension: "mp4") {
                                             VideoPlayer(player: {
                                                 let player = AVPlayer(url: videoURL)
@@ -199,10 +199,10 @@ struct ContentView: View {
                                 
                                 // Video IA Asistente (circular)
                                 VStack(spacing: 8) {
-                                        Button(action: {
-                                            // Mostrar vista de IA asistente
-                                            showingAIAssistant = true
-                                        }) {
+                                    Button(action: {
+                                        // Mostrar vista de IA asistente
+                                        showingAIAssistant = true
+                                    }) {
                                         if let videoURL = Bundle.main.url(forResource: "IA-ASIST", withExtension: "mp4") {
                                             VideoPlayer(player: {
                                                 let player = AVPlayer(url: videoURL)
