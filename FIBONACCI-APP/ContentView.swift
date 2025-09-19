@@ -37,18 +37,43 @@ struct ContentView: View {
                         // Header con logo de Fibonacci arriba
                         VStack(spacing: 10) {
                             // Logo de Fibonacci en la parte superior
-                            Image("fibonacci-logo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100, height: 100)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                                .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 2))
-                                .shadow(radius: 8)
-                                .onTapGesture {
-                                    // Conectar a Vaser Token Wallet
-                                    walletService.connectVaserToken()
-                                    showingWalletSelection = true
+                            Group {
+                                if let imagePath = Bundle.main.path(forResource: "fibonacci-logo", ofType: "png"),
+                                   let image = UIImage(contentsOfFile: imagePath) {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 150, height: 150)
+                                        .shadow(radius: 8)
+                                        .onTapGesture {
+                                            // Conectar a Vaser Token Wallet
+                                            walletService.connectVaserToken()
+                                            showingWalletSelection = true
+                                        }
+                                } else {
+                                    // Fallback con imagen del sistema
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(Color.blue.opacity(0.6))
+                                        .frame(width: 150, height: 150)
+                                        .overlay(
+                                            VStack(spacing: 5) {
+                                                Image(systemName: "heart.fill")
+                                                    .font(.system(size: 40))
+                                                    .foregroundColor(.white)
+                                                Text("FIBONACCI")
+                                                    .font(.headline)
+                                                    .fontWeight(.bold)
+                                                    .foregroundColor(.white)
+                                            }
+                                        )
+                                        .shadow(radius: 8)
+                                        .onTapGesture {
+                                            // Conectar a Vaser Token Wallet
+                                            walletService.connectVaserToken()
+                                            showingWalletSelection = true
+                                        }
                                 }
+                            }
                             
                             Text("FIBONACCI APP")
                                 .font(.largeTitle)
