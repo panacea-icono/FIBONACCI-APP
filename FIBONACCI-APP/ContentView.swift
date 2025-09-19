@@ -16,12 +16,12 @@ struct ContentView: View {
     @StateObject private var walletService = WalletService()
     @State private var showingWalletSelection = false
     
-    // Lista de imágenes de médicos (nombres simplificados)
+    // Lista de imágenes de médicos
     private let doctorImages = [
-        "doctor_logo",
-        "doctor_logo",
-        "doctor_logo",
-        "doctor_logo"
+        "fibonacci-logo",
+        "IA-ASIST",
+        "fibonacci-logo",
+        "IA-ASIST"
     ]
 
     var body: some View {
@@ -191,7 +191,7 @@ struct VideoBackgroundView: View {
         // Intentar cargar video si está disponible
         .overlay(
             Group {
-                if let videoURL = Bundle.main.url(forResource: "fibonacci_waves", withExtension: "mp4") {
+                if let videoURL = Bundle.main.url(forResource: "fondo", withExtension: "mp4") {
                     VideoPlayer(player: AVPlayer(url: videoURL))
                         .aspectRatio(contentMode: .fill)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)

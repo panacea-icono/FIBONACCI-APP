@@ -118,11 +118,12 @@ class WalletService: ObservableObject {
         showingWalletSelection = true
     }
     
-    func getVaserTokenInfo() -> (name: String, symbol: String, price: Double) {
+    func getVaserTokenInfo() -> (name: String, symbol: String, price: Double, videoName: String) {
         return (
             name: "Vaser Token",
             symbol: "VASER",
-            price: 0.618 // Golden ratio price
+            price: 0.618, // Golden ratio price
+            videoName: "vaser-token" // Video logo del Vaser Token
         )
     }
 }

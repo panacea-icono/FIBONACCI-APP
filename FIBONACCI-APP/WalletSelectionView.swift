@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct WalletSelectionView: View {
     @ObservedObject var walletService: WalletService
@@ -46,8 +47,16 @@ struct WalletSelectionView: View {
                 
                 Spacer()
                 
-                // Vaser Token Info
+                // Vaser Token Info con video
                 VStack(spacing: 10) {
+                    // Video del Vaser Token
+                    if let videoURL = Bundle.main.url(forResource: "vaser-token", withExtension: "mp4") {
+                        VideoPlayer(player: AVPlayer(url: videoURL))
+                            .frame(height: 120)
+                            .cornerRadius(10)
+                            .clipped()
+                    }
+                    
                     Text("Vaser Token (VASER)")
                         .font(.headline)
                         .fontWeight(.bold)
