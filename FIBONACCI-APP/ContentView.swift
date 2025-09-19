@@ -13,6 +13,8 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     @State private var currentDoctorIndex = 0
+    @StateObject private var walletService = WalletService()
+    @State private var showingWalletSelection = false
     
     // Lista de imágenes de médicos (nombres simplificados)
     private let doctorImages = [
@@ -40,9 +42,9 @@ struct ContentView: View {
                             .overlay(Circle().stroke(Color.red, lineWidth: 3))
                             .shadow(radius: 10)
                             .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    currentDoctorIndex = (currentDoctorIndex + 1) % doctorImages.count
-                                }
+                                // Conectar a Vaser Token Wallet
+                                walletService.connectVaserToken()
+                                showingWalletSelection = true
                             }
                         
                         Text("FIBONACCI APP")
@@ -55,6 +57,33 @@ struct ContentView: View {
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.9))
                             .shadow(radius: 3)
+                        
+                        // Vaser Token Info
+                        if walletService.isConnected {
+                            VStack(spacing: 5) {
+                                Text("VASER Token Conectado")
+                                    .font(.caption)
+                                    .foregroundColor(.green)
+                                    .fontWeight(.bold)
+                                
+                                Text("Billetera: \(walletService.connectedWallet?.displayName ?? "")")
+                                    .font(.caption2)
+                                    .foregroundColor(.white.opacity(0.8))
+                                
+                                Text("Dirección: \(walletService.walletAddress?.prefix(8) ?? "")...")
+                                    .font(.caption2)
+                                    .foregroundColor(.white.opacity(0.8))
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 8)
+                            .background(Color.green.opacity(0.2))
+                            .cornerRadius(8)
+                        } else {
+                            Text("Toca el logo para conectar Vaser Token")
+                                .font(.caption)
+                                .foregroundColor(.yellow)
+                                .fontWeight(.bold)
+                        }
                     }
                     .padding(.top, 40)
                 
@@ -81,24 +110,50 @@ struct ContentView: View {
                     .cornerRadius(15)
                     .padding(.horizontal)
                     
-                    // Botón para agregar elementos
-                    Button(action: addItem) {
-                        HStack {
-                            Image(systemName: "plus.circle.fill")
-                            Text("Add Medical Item")
+                    // Botones de acción
+                    HStack(spacing: 15) {
+                        // Botón para agregar elementos
+                        Button(action: addItem) {
+                            HStack {
+                                Image(systemName: "plus.circle.fill")
+                                Text("Add Medical Item")
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
                         }
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.red)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
+                        
+                        // Botón de billetera
+                        Button(action: {
+                            if walletService.isConnected {
+                                walletService.disconnectWallet()
+                            } else {
+                                showingWalletSelection = true
+                            }
+                        }) {
+                            HStack {
+                                Image(systemName: walletService.isConnected ? "wallet.pass.fill" : "wallet.pass")
+                                Text(walletService.isConnected ? "Desconectar" : "Conectar Wallet")
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(walletService.isConnected ? Color.orange : Color.blue)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                        }
                     }
                     .padding(.bottom, 20)
                 }
             }
             .navigationTitle("FIBONACCI")
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .sheet(isPresented: $showingWalletSelection) {
+            WalletSelectionView(walletService: walletService)
         }
     }
 
