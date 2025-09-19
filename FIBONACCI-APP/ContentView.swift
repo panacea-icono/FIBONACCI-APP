@@ -144,8 +144,8 @@ struct ContentView: View {
                     
                         // Lista de elementos con fondo semitransparente
                         VStack {
-            List {
-                ForEach(items) { item in
+                            List {
+                                ForEach(items) { item in
                                     HStack {
                                         Image(systemName: "medical.thermometer")
                                             .foregroundColor(.red)
@@ -155,9 +155,9 @@ struct ContentView: View {
                                     .padding(.vertical, 8)
                                     .background(Color.white.opacity(0.1))
                                     .cornerRadius(8)
-                }
-                .onDelete(perform: deleteItems)
-            }
+                                }
+                                .onDelete(perform: deleteItems)
+                            }
                             .listStyle(PlainListStyle())
                             .background(Color.clear)
                         }
